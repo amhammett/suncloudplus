@@ -27,7 +27,13 @@ if(we_have_the_technology()){
   get_data()
   remove_legacy()
     html and css
-  rebuild_page()
+  build_suncloud_plus()
+
+function build_suncloud_plus() {
+  build_header();
+  build_body();
+  build_footer();
+}
   */
 
   // stage 1
@@ -83,7 +89,57 @@ function get_metro_menu_assets() {
 }
 
 function get_metro_menu_html() {
-  return '<div class="metrouicss"> <div class="nav-bar"> <div class="nav-bar-inner"> <a href="#"><span class="element brand">Suncrop Cloud</span></a> <span class="divider"></span> <ul class="menu" style="overflow:visible;"> <li class="legacy-dash"> <a href="#">Project Dashboard</a> </li> <li class="legacy-details"> <a href="#">Project Details</a> </li> <li class="legacy-res"> <a href="#">Project Resources</a> </li> <li class="legacy-wiz"> <a href="#">Request Wizard</a> </li> <li data-role="dropdown" class="sites show-sites"> <a>Sites</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Sites</a></li> <li class="divider"></li> <li class="loading"><a href="#">SITES</a></li> </ul> </li> <li data-role="dropdown" class="ports show-ports"> <a>Ports</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Ports</a></li> <li class="divider"></li> <li class="loading"><a href="#">PORTS</a></li> </ul> </li> <li data-role="dropdown" class="hosts show-hosts"> <a>Hosts</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Hosts</a></li> <li class="divider"></li> <li class="loading"><a href="#">HOSTS</a></li> </ul> </li> </ul> </div> </div> </div>';
+  var menu_html = '\
+    <div class="metrouicss"> \
+      <div class="nav-bar"> \
+        <div class="nav-bar-inner"> \
+          <a href="#"> \
+            <span class="element brand">Suncrop Cloud</span> \
+          </a> \
+          <span class="divider"></span> \
+          <ul class="menu" style="overflow:visible;"> \
+          <!-- this probably doesnt need to be hard coded --> \
+            <li class="legacy-dash legacy-link" data-name="ctl00$MenuContent$_showProjectDeployments"><a href="#">Project Dashboard</a></li> \
+            <li class="legacy-details legacy-link" data-name="ctl00$MenuContent$_showProjectDetails"><a href="#">Project Details</a></li> \
+            <li class="legacy-res legacy-link" data-name="ctl00$MenuContent$_showResourceDetailsButton"><a href="#">Project Resources</a></li> \
+            <li class="legacy-wiz legacy-link" data-name="ctl00$MenuContent$_showDeploymentWizard"><a href="#">Request Wizard</a></li> \
+            <li data-role="dropdown" class="sites show-sites"> \
+              <a>Sites</a> \
+              <ul class="dropdown-menu" style="display:none;"> \
+                <li class="all_sites"><a href="#">All Sites</a></li> \
+                <li class="divider"></li> \
+                <li class="loading"><a href="#">SITES</a></li> \
+              </ul> \
+            </li> \
+            <li data-role="dropdown" class="ports show-ports"> \
+              <a>Ports</a> \
+              <ul class="dropdown-menu" style="display:none;"> \
+                <li class="all_ports"><a href="#">All Ports</a></li> \
+                <li class="divider"></li> \
+                <li class="loading"><a href="#">PORTS</a></li> \
+              </ul> \
+            </li> \
+            <li data-role="dropdown" class="hosts show-hosts"> \
+              <a>Hosts</a> \
+              <ul class="dropdown-menu" style="display:none;"> \
+                <li class="all_hosts"><a href="#">All Hosts</a></li> \
+                <li class="divider"></li> \
+                <li class="loading"><a href="#">HOSTS</a></li> \
+              </ul> \
+            </li> \
+            <li data-role="dropdown" class="versions show-versions"> \
+              <a>Versions</a> \
+              <ul class="dropdown-menu" style="display:none;"> \
+                <li class="all_versions"><a href="#">All Versions</a></li> \
+                <li class="divider"></li> \
+                <li class="loading"><a href="#">VERSIONS</a></li> \
+              </ul> \
+            </li> \
+          </ul> \
+        </div> \
+      </div> \
+    </div>';
+  return menu_html;
 }
 
 function add_metro_heading() {
@@ -124,17 +180,9 @@ function remove_legacy_header(){
  * enable_legacy_menu()
  ************************************************/
 function enable_legacy_menu() {
-  $('.legacy-dash a').click(function() {
-    $('[name="ctl00$MenuContent$_showProjectDeployments"]').click();
-  });
-  $('.legacy-details a').click(function() {
-    $('[name="ctl00$MenuContent$_showProjectDetails"]').click();
-  });
-  $('.legacy-res a').click(function() {
-    $('[name="ctl00$MenuContent$_showResourceDetailsButton"]').click();
-  });
-  $('.legacy-wiz a').click(function() {
-    $('[name="ctl00$MenuContent$_showDeploymentWizard"]').click();
+  $('.legacy-link a').click(function() {
+    var input_name = $(this).attr('data-name');
+    $('[name="'+input_name+'"]').click();
   });
 }
 
@@ -236,7 +284,7 @@ function add_metro_events() {
   function show_hosts(site_host) {
     $('ul li').show();
 
-    if(site_host == "all_host") {return;}
+    if(site_host == "all_hosts") {return;}
     $('.div-list td a').each(function(index, element) {
       if($(this).attr('href').split(':')[1].split('/')[2] != site_host) {
         $(this).parent().parent().parent().parent().parent().parent().parent().hide();
