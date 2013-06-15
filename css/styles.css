@@ -521,42 +521,42 @@ div.accountInfo
 
 .green
 {
-	background-image: url(../Images/lightgreen.png);
+	background-image: url("/img/lightgreen.png");
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
 .red
 {
-	background-image: url(../Images/lightred.png);
+	background-image: url("/img/lightred.png");
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
 .yellow
 {
-	background-image: url("../Images/lightyellow.png");
+	background-image: url("/img/lightyellow.png");
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
 .blue
 {
-	background-image: url("../Images/lightblue.png");
+	background-image: url("/img/lightblue.png");
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
 .grey
 {
-	background-image: url("../Images/lightgrey.png");
+	background-image: url("/img/lightgrey.png");
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
 .orange
 {
-	background-image: url("../Images/lightorange.png");
+	background-image: url("/img/lightorange.png");
 	background-repeat: no-repeat;
 	background-position: center center;
 }

@@ -1,10 +1,7 @@
-// *** suncrop cloud plus
-resource_location="https://assetsdev.sun.cloud/new-media/suncrop-cloud-plus/";
-resource_location="";
+/* 
+ * suncrop cloud plus
+ */
 
-function we_have_the_technology() {
-  return true;
-}
 /* called via
 
 var script = document.createElement( 'script' );
@@ -14,23 +11,50 @@ document.body.appendChild(script);
 
 */
 
-function get_metro_menu_assets() {
-  return '<link href="'+resource_location+'css/modern.css" rel="stylesheet"> <script type="text/javascript" src="'+resource_location+'js/lib/jquery-1.8.3.min.js"></script> <script type="text/javascript" src="'+resource_location+'js/dropdown.js"></script>';
+resource_location="https://assetsdev.sun.cloud/new-media/suncrop-cloud-plus/";
+resource_location="";
+
+function we_have_the_technology() {
+  return true;
 }
 
-function get_metro_menu_html() {
-  return '<div class="metrouicss"> <div class="nav-bar"> <div class="nav-bar-inner"> <a href="#"><span class="element brand">suncrop Cloud</span></a> <span class="divider"></span> <ul class="menu" style="overflow:visible;"> <li class="legacy-dash"> <a href="#">Project Dashboard</a> </li> <li class="legacy-details"> <a href="#">Project Details</a> </li> <li class="legacy-res"> <a href="#">Project Resources</a> </li> <li class="legacy-wiz"> <a href="#">Request Wizard</a> </li> <li data-role="dropdown" class="sites"> <a>Sites</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Sites</a></li> <li class="divider"></li> <li class="loading"><a href="#">SITES</a></li> </ul> </li> <li data-role="dropdown" class="ports"> <a>Ports</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Ports</a></li> <li class="divider"></li> <li class="loading"><a href="#">PORTS</a></li> </ul> </li> <li data-role="dropdown" class="hosts"> <a>Hosts</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Hosts</a></li> <li class="divider"></li> <li class="loading"><a href="#">HOSTS</a></li> </ul> </li> </ul> </div> </div> </div>';
+if(we_have_the_technology()){
+  // magic starts here
+  nice_ify_css();
+  add_metro();
+  enable_legacy_menu();
+  update_metro_menu();
+  add_metro_events();
 }
 
-function add_metro_heading() {
-  var page_heading=$('#ctl00_TitleContent__projectNameLabel').text();
-  $('.main').prepend('<h1>'+page_heading+'</h1>').find('h1').css({'margin': '0'})
+/***********************************************
+ * nice_ify_css()
+ ************************************************/
+function nice_ify_css() {
+  $('.page').css({
+    'border':'none',
+    'margin':'0',
+    'width':'100%'
+  });
+  $('h2').css({'margin':'0'});
+  $(".header .hideSkiplink ").hide();
+  $("div.div-list ul").css("display","block").css("width","100%");
+  $("drupal_tools_site_selector select").css("float","left");
+  $('#drupal_tools div').css({
+    'background-color':'#2C3F6A',
+    'color':'#FFFFEA',
+    'display':'block',
+    'line-height':'1.70em',
+    'padding':'2px 10px',
+    'white-space':'nowrap',
+    'text-decoration':'none'
+  });
+  $('.waiting').hide();
 }
 
-function remove_legacy(){
-  $('.header').remove();
-}
-
+/***********************************************
+ * add_metro()
+ ************************************************/
 function add_metro() {
   add_metro_menu();
   add_metro_heading();
@@ -42,6 +66,51 @@ function add_metro_menu() {
   $('body').prepend(get_metro_menu_html());
 }
 
+function get_metro_menu_assets() {
+  return '<link href="'+resource_location+'css/modern.css" rel="stylesheet"> <script type="text/javascript" src="'+resource_location+'js/lib/jquery-1.8.3.min.js"></script> <script type="text/javascript" src="'+resource_location+'js/dropdown.js"></script>';
+}
+
+function get_metro_menu_html() {
+  return '<div class="metrouicss"> <div class="nav-bar"> <div class="nav-bar-inner"> <a href="#"><span class="element brand">Suncrop Cloud</span></a> <span class="divider"></span> <ul class="menu" style="overflow:visible;"> <li class="legacy-dash"> <a href="#">Project Dashboard</a> </li> <li class="legacy-details"> <a href="#">Project Details</a> </li> <li class="legacy-res"> <a href="#">Project Resources</a> </li> <li class="legacy-wiz"> <a href="#">Request Wizard</a> </li> <li data-role="dropdown" class="sites show-sites"> <a>Sites</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Sites</a></li> <li class="divider"></li> <li class="loading"><a href="#">SITES</a></li> </ul> </li> <li data-role="dropdown" class="ports show-ports"> <a>Ports</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Ports</a></li> <li class="divider"></li> <li class="loading"><a href="#">PORTS</a></li> </ul> </li> <li data-role="dropdown" class="hosts show-hosts"> <a>Hosts</a> <ul class="dropdown-menu" style="display:none;"> <li><a href="#">All Hosts</a></li> <li class="divider"></li> <li class="loading"><a href="#">HOSTS</a></li> </ul> </li> </ul> </div> </div> </div>';
+}
+
+function add_metro_heading() {
+  var page_heading=$('#ctl00_TitleContent__projectNameLabel').text();
+  var metro_header='<div class="page-header-content"><h1>'+page_heading+'</h1><a href="/" class="back-button"></a></div>';
+  $('.main').prepend(metro_header);
+  $('.page-header-content').css({
+    'position': 'relative',
+    'height': '100px',
+  }).find('h1').css({
+    'position': 'absolute',
+    'margin': '0',
+    'padding': '0',
+    'left': '120px',
+    'bottom': '0',
+    'font-family': "'Segoe UI Light', 'Open Sans', Verdana, Arial, Helvetica, sans-serif",
+    'font-weight': '200',
+    'font-size': '42pt',
+    'letter-spacing': '0.00em',
+    'line-height': '65pt',
+    'font-smooth': 'always',
+    'color': '#000000'
+  });
+  $('.back-button').css({
+    'background':'url(/img/back.png) no-repeat 35px 35px',
+    'display':'block',
+    'height':'100px',
+    'width':'100px'
+  });
+  $('.nav-bar').css({'padding':'10px'});
+}
+
+function remove_legacy(){
+  $('.header').remove();
+}
+
+/***********************************************
+ * enable_legacy_menu()
+ ************************************************/
 function enable_legacy_menu() {
   $('.legacy-dash a').click(function() {
     $('[name="ctl00$MenuContent$_showProjectDeployments"]').click();
@@ -57,102 +126,133 @@ function enable_legacy_menu() {
   });
 }
 
-function nice_ify_css() {
-  $('.page').css({
-    'border':'none',
-    'margin':'0',
-    'width':'100%'
-  });
-  $('h2').css({'margin':'0'});
-  $(".header .hideSkiplink ").hide();
-  $("div.div-list ul").css("display","block").css("width","100%");
-  $("drupal_tools_site_selector select").css("float","left");
-  
-  $('#drupal_tools div').css({
-    'background-color':'#2C3F6A',
-    'color':'#FFFFEA',
-    'display':'block',
-    'line-height':'1.70em',
-    'padding':'2px 10px',
-    'white-space':'nowrap',
-    'text-decoration':'none'
-  });
-}
-
-// get a list of all sites
-function get_sites() {
-  var sites = {}
-
-  $('.div-list td').each(function(index, element) {
-    if($(element).find('strong:first').text() != "") {
-	  site_name=$(element).find('strong:first').text();
-      sites[site_name]=site_name;
-    }
-  });
-
-  return sites;
-}
-
-// get a list of all ports. this is lazy and should be included in sites object
-function get_ports() {
-  var ports = {}
-  
-  $('.div-list td a').each(function() {
-    var port = $(this).attr('href').split(':')[2];
-    ports[port]=port;
-  })
-  
-  return ports;
-}
-
-// show all instances for a single site
-function show_site(site_name) {
-  $('ul li').show();
-
-  if(site_name == "all_sites") {return;}
-  
-  $('.div-list td').each(function(index, element) {
-    if($(element).find('strong:first').text() != site_name && $(element).find('strong:first').text() != "") {
-      $(this).parent().parent().parent().parent().parent().hide();
-    }
-  });
-}
-
-// show all instances for a single port
-function show_port(site_port) {
-  $('ul li').show();
-
-  if(site_port == "all_ports") {return;}
-  
-  $('.div-list td a').each(function(index, element) {
-    if($(this).attr('href').split(':')[2] != site_port) {
-      $(this).parent().parent().parent().parent().parent().parent().parent().hide();
-    }
-  });
-}
+/***********************************************
+ * update_metro_menu()
+ ************************************************/
 
 function update_metro_menu() {
-  update_sites_list();
-  update_ports_list();
-  update_hosts_list();
-}
-
-function update_sites_list() {
-  var sites = get_sites();
-  var site_list_html="";
-  
-  for(site in sites) {
-    if(site) {
-      site_list_html+='<li class="'+site+'"><a href="#">'+site+'</a></li>';
-	}
+  function update_sites_list(site_map) {
+    var list_html=update_list_helper(site_map, 'name');
+    $('.menu .sites ul').append(list_html);
+    $('.menu .sites ul li.loading').remove();
   }
-  console.log(sites);
-  $('.menu .sites ul').append(site_list_html).find('.loading').hide();
+
+  function update_ports_list(site_map) {
+    var list_html=update_list_helper(site_map, 'port');
+    $('.menu .ports ul').append(list_html);
+    $('.menu .ports ul li.loading').remove()
+  }
+  function  update_hosts_list(site_map) {
+    var list_html=update_list_helper(site_map, 'host');
+    $('.menu .hosts ul').append(list_html)
+    $('.menu .hosts ul li.loading').remove();
+  }
+
+  function update_list_helper(site_map, list_type) {
+    var list_html=new Array();
+
+    for(site in site_map) {
+      if(site_map[site][list_type]) {
+        list_html.push('<li class="'+site_map[site][list_type]+'"><a href="#">'+site_map[site][list_type]+'</a></li>');
+      }
+    }
+    list_html.sort();
+
+    return list_html;
+  }
+
+  function get_instance_map() {
+    var map = {};
+
+    $('.div-list td').each(function(index, element) {
+      var site_name=$(element).find('strong:first').text()
+      if(site_name != "") {
+        var href=$(element).find('a').attr('href');
+        if(typeof href != "undefined") {
+          var instance = {
+            name: site_name,
+            port: href.split(':')[2],
+            host: href.split(':')[1].split('/')[2],
+            url: href
+          }
+          map[instance.port]=instance;
+        }
+      }
+    });
+
+    return map;
+  }
+
+  site_map=get_instance_map();
+
+  update_sites_list(site_map);
+  update_ports_list(site_map);
+  update_hosts_list(site_map);
+}
+
+/***********************************************
+ * update_metro_menu()
+ ************************************************/
+function add_metro_events() {
+  // show all instances for a single site
+  function show_sites(site_name) {
+    $('ul li').show();
+
+    if(site_name == "all_sites") {return;}
+    
+    $('.div-list td').each(function(index, element) {
+      if($(element).find('strong:first').text() != site_name && $(element).find('strong:first').text() != "") {
+        $(this).parent().parent().parent().parent().parent().hide();
+      }
+    });
+  }
+
+  // show all instances for a single port
+  function show_ports(site_port) {
+    $('ul li').show();
+
+    if(site_port == "all_ports") {return;}
+    
+    $('.div-list td a').each(function(index, element) {
+      if($(this).attr('href').split(':')[2] != site_port) {
+        $(this).parent().parent().parent().parent().parent().parent().parent().hide();
+      }
+    });
+  }
+
+  // show all instances for a single port
+  function show_hosts(site_host) {
+    $('ul li').show();
+
+    if(site_host == "all_host") {return;}
+    $('.div-list td a').each(function(index, element) {
+      if($(this).attr('href').split(':')[1].split('/')[2] != site_host) {
+        $(this).parent().parent().parent().parent().parent().parent().parent().hide();
+      }
+    });
+  }
+
+  $('.show-sites li a').click(function() {
+    show_sites($(this).parent().attr('class'));
+  });
+
+  $('.show-ports li a').click(function() {
+    show_ports($(this).parent().attr('class'));
+  });
+
+  $('.show-hosts li a').click(function() {
+    show_hosts($(this).parent().attr('class'));
+  });
 }
 
 
- function update_ports_list() {}
- function  update_hosts_list() {}
+/************************************************/
+
+
+
+
+
+
 
 // tools bar
 function create_toolbar() {
@@ -194,30 +294,4 @@ function create_ports_tool() {
   return port_selector+port_selector_scripts;
 }
 
-function get_sitemap() {
-  var map = {};
 
-  $('.div-list td').each(function(index, element) {
-    var site_name=$(element).find('strong:first').text()
-    if(site_name != "") {
-    var href=$(element).find('a').attr('href');
-      if(typeof href != "undefined") {
-    console.log(href)
-      var port=href.split(':')[2];
-      var host='';//href.split(':')[1];
-    map[port]=site_name;
-    }
-      
-    }
-  });
-  
-  return map;
-}
-
-if(we_have_the_technology()){
-  // magic starts here
-  nice_ify_css();
-  add_metro();
-  enable_legacy_menu();
-  update_metro_menu();  
-}
