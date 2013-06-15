@@ -1,0 +1,1605 @@
+/* DEFAULTS
+----------------------------------------------------------*/
+*
+{
+	margin: 0px;
+	padding: 0px;
+	target-new: tab;    
+}
+
+body
+{
+	background: #b6b7bc;
+	font-size: .80em;
+	font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	color: #696969;
+}
+
+p
+{
+	margin-bottom: 10px;
+	line-height: 1.6em;
+}
+
+td
+{
+	padding: 4px;    
+}
+
+th
+{
+	padding: 4px;    
+}
+
+label
+{
+	margin-left: 4px;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+	font-size: 1.5em;
+	color: #666666;
+	font-variant: small-caps;
+	text-transform: none;
+	font-weight: 200;
+	margin-bottom: 0px;
+}
+
+h1
+{
+	font-size: 1.6em;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+
+}
+
+h2
+{
+	font-size: 1.5em;
+	font-weight: 600;
+}
+
+h3
+{
+	font-size: 1.2em;
+}
+
+h4
+{
+	font-size: 1.1em;
+}
+
+h5, h6
+{
+	font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+	margin-top: 0px;
+}
+
+select
+{
+	border-color: #EEEEEE;
+	background-color: #FFFFEA;    
+	min-width: 100px;    
+}
+
+input[type=text]
+{
+	border-color: #EEEEEE; 
+	background-color: #FFFFEA;      
+	min-width: 100px;
+}
+
+input[type=button], input[type=submit]
+{
+	width: auto;
+	height: auto;
+	overflow: visible;    
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page
+{
+	/*width: 90%;*/
+	width: 1100px;
+	background-color: #FFFFFF;
+	margin: 20px auto 0px auto;
+	border: 1px solid #496077;
+	padding-bottom: 2px;
+}
+
+.header
+{
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	background: #fff; /*#efefde; #4b6c9e; */
+}
+
+.header h1
+{
+	font-weight: 700;
+	margin: 0px;
+	padding: 0px 0px 0px 20px;
+	color: #f9f9f9;
+	border: none;
+	line-height: 2em;
+	font-size: 2em;
+}
+
+.header h1 a, .header h1 a:visited
+{
+	color: #f9f9f9;
+	text-decoration: none;    
+	width: 100%;
+}
+
+.main
+{	
+	min-height: 420px;
+	background-color: #FFFFFF; 
+	
+}
+
+.leftCol
+{
+	padding: 6px 0px;
+	margin: 12px 8px 8px 8px;
+	width: 200px;
+	min-height: 200px;
+}
+
+.footer
+{
+	color: #4e5766;
+	padding: 8px 0px 0px 0px;
+	margin: 0px auto;
+	text-align: center;
+	line-height: normal;
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+div.hideSkiplink
+{
+	background-color: #fff; /* #efefde; Dark Blue #3a4f63; */
+	width: 100%;
+}
+
+div.tab
+{
+	background-color: #006699; /* pale grey: #dde4ec; */
+}
+
+div.main-tab
+{
+	background-color: #006699;    
+}
+
+div.menu
+{
+	padding: 0px;
+}
+
+div.menu ul
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	display: table-row;
+	white-space: nowrap;
+}
+
+div.menu li
+{
+	float: left;
+}
+
+
+
+div.menu li a, div.menu li a:visited
+{
+	text-decoration: none;
+	white-space: nowrap;
+	float: left;
+}
+
+div.menu ul li a:hover
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+div.menu ul li a:active
+{
+	background-color: #465c71;
+	color: #cfdbe6;
+	text-decoration: none;
+}
+
+div.menu ul li a.menuSelected
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+div.sub-menu
+{
+	padding: 0px;
+	
+}
+
+div.sub-menu ul
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	display: table-row;
+	white-space: nowrap;
+}
+
+div.sub-menu li
+{
+	float: left;
+}
+
+div.sub-menu li a, div.sub-menu li a:visited
+{
+	background-color: #2C3F6A; /* Cream: #efefde; Dark Blue: #465c71; */
+	border: 4px #4e667d outset;
+	color: #FFFFEA;
+	display: block;
+	line-height: 1.35em;
+	padding: 4px 20px;
+	text-decoration: none;
+	white-space: nowrap;
+	float: left;
+}
+
+div.sub-menu ul li a:hover
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+div.sub-menu ul li a:active
+{
+	background-color: #465c71;
+	color: #cfdbe6;
+	text-decoration: none;
+}
+
+div.sub-menu ul li a.menuSelected
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+div.version
+{
+    text-align: right; 
+    color: White; 
+    list-style-position: outside; 
+    padding: 0px 0px 0px 0px;
+}
+
+.menu-button
+{
+	background-color: #2C3F6A; /* Cream: #efefde; Dark Blue: #465c71; */
+	color: #FFFFEA;
+	display: block;
+	line-height: 1.70em;
+	padding: 2px 10px;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.menu-button-btn
+{
+	background-color: #2C3F6A; /* Cream: #efefde; Dark Blue: #465c71; */
+	color: #FFFFEA;
+	display: block;
+	border-width: 4px;
+	border-color: #dde4ec;
+	border-style: outset;
+	line-height: 1.35em;
+	padding: 2px 10px;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.menu-selected-btn
+{
+    background-color: #FFFFEA;
+	color: #465c71;
+	text-decoration: none;
+	display: block;
+	line-height: 1.35em;
+	padding: 2px 10px;
+	white-space: nowrap;
+	border-width: 4px;
+	border-color: #dde4ec;
+	border-style: outset;
+}
+
+
+.menu-selected
+{
+	background-color: #FFFFFF; /* #FFFFEA;*/
+	color: #465c71;
+	text-decoration: none;
+	display: block;
+	line-height: 1.70em;
+	padding: 2px 10px;
+	white-space: nowrap;
+}
+
+
+.main-menu
+{
+    width: 1000px; 
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: table-row;
+    white-space: nowrap;     
+}
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+	margin: 1em 0px;
+	padding: 1em;
+	border: 1px solid #ccc;
+}
+
+fieldset p
+{
+	margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+	display: block;
+}
+
+fieldset label.inline
+{
+	display: inline;
+}
+
+legend
+{
+	font-size: 1.1em;
+	font-weight: 600;
+	padding: 2px 4px 8px 4px;
+}
+
+input.textEntry
+{
+	width: 320px;
+	border: 1px solid #ccc;
+}
+
+input.passwordEntry
+{
+	width: 320px;
+	border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+	width: 42%;
+}
+
+/* Table
+----------------------------------------------------------*/
+
+.table
+{
+	display: table;
+}
+
+.row
+{
+	display: table-row;    
+}
+
+.altrow
+{
+	display: table-row;
+	background-color: #f9f9f9;    
+}
+
+.cell
+{
+	display: table-cell;
+	padding: 2px 2px 2px 2px;
+	margin: 1px 1px 1px 1px;
+}
+
+.headerRows
+{
+	display: table-header-group;
+	background-color: #2C3F6A; 
+	border: none;
+	padding: 2px 2px 2px 2px;   
+	color: #efefde;
+}
+
+.tableBody
+{
+	display: table-row-group;    
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+	clear: both;
+}
+
+.title
+{
+	display: block;
+	float: left;
+	text-align: left;
+	width: auto;
+}
+
+.title-content
+{
+	padding-left: 8px;
+	padding-bottom: 8px;
+	padding-top: 8px;
+	background-color: #FFFFFF; 
+}
+
+.loginDisplay
+{
+	font-size: 1.1em;
+	display: block;
+	text-align: right;
+	padding: 10px;
+	color: White;
+}
+
+.loginDisplay a:link
+{
+	color: white;
+}
+
+.loginDisplay a:visited
+{
+	color: white;
+}
+
+.loginDisplay a:hover
+{
+	color: white;
+}
+
+.failureNotification
+{
+	font-size: 1.2em;
+	color: Red;
+}
+
+.bold
+{
+	font-weight: bold;
+}
+
+.submitButton
+{
+	text-align: right;
+	padding-right: 10px;
+}
+
+.green
+{
+	background-image: url(../Images/lightgreen.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.red
+{
+	background-image: url(../Images/lightred.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.yellow
+{
+	background-image: url("../Images/lightyellow.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.blue
+{
+	background-image: url("../Images/lightblue.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.grey
+{
+	background-image: url("../Images/lightgrey.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.orange
+{
+	background-image: url("../Images/lightorange.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.pool
+{
+	font-size: 1em;
+	vertical-align: top;
+}
+
+.trafficlight
+{
+	text-align: center;
+	vertical-align: top;
+}
+
+a.imageButton
+{
+	border: none;
+}
+
+.left
+{
+	text-align: left;
+}
+
+.right
+{
+	text-align: right;
+	float: right;	
+}
+
+td.right, th.right
+{
+	text-align: right;
+	float: none;	    
+}
+
+.centre
+{
+	text-align: center;
+}
+
+.top
+{
+	vertical-align: top;    
+}
+
+.bottom
+{
+	vertical-align: bottom;    
+}
+
+.bordered
+{
+	border: 1px solid LightGray;
+	border-spacing: 0px;
+}
+
+.unbordered
+{
+	border: none;
+}
+
+.bubble
+{
+	height: 68px;
+	background-color: #2C3F6A;
+}
+
+.message
+{
+	font-size: 1.1em;
+	color: #666666;
+	font-variant: normal;
+	text-transform: none;
+	font-weight: 200;
+	margin-bottom: 0px;
+	font-style: italic;
+}
+
+#leftlogo
+{
+	max-width: 600px;
+	height: 68px;
+}
+#sunlogo
+{
+	position: absolute;
+	top: 5px;
+	left: 33px;
+}
+
+.hidden
+{
+	display: none;
+}
+
+.shown
+{
+	display: inherit;
+}
+
+.error
+{
+	color: Red;
+	border-color: Red;
+}
+
+.deployStatus
+{
+	color: #000;
+	font-weight: 200;    
+}
+
+.yellow-bg
+{
+	background-color: #ffffdd;    
+}
+
+.gridCell
+{
+	
+}
+
+.gridCell div
+{
+
+}
+
+.gridText
+{
+	width: 60px;
+}
+
+.gridCalendarText
+{
+	width: 66px;
+}
+
+.gridCalendarColumn
+{
+	min-width: 86px;
+}
+
+.gridAltRow
+{
+	background-color: #f9f9f9;    
+}
+
+.gridHeaderRow
+{
+	background-color: #efefde;
+	border: none;
+	padding: 2px 2px 2px 2px;
+}
+
+.gridHeaderRow TH
+{
+	color: #2C3F6A;
+	font-weight: 100;
+}
+
+div.outer-parameter
+{
+  float:none;
+  padding: 2px;
+}
+
+div.parameter
+{
+	display: block;
+	padding: 2px 1px 2px 1px;
+}
+
+.parameter-input
+{
+	display: inline;  
+	vertical-align: bottom;  
+}
+
+.parameter-title
+{
+	width: 125px;    
+	vertical-align: top;
+	margin-right: 4px;
+	display:inline-block;
+	white-space: normal;
+}
+
+div.region
+{
+	display: block;
+	padding: 2px 1px 2px 1px;
+	background-color: #FFFFFF;
+}
+
+td.region
+{
+	background-color: #FFFFFF;
+	vertical-align: top;
+	margin: 10px;
+}
+
+#cellR3 div.region input
+{
+	width: 40%;
+		
+}
+
+#cellR4 div.region input[type=text], #cellR1 div.region input[type=text], #cellR2 div.region input[type=text]
+{
+	width: 220px;     
+}
+
+.region-input
+{
+	display: inline;    
+}
+
+.region-selections
+{
+	display: inline;
+}
+
+.region-title
+{
+	width: 120px;    
+	vertical-align: text-top;
+}
+
+div.inline
+{
+	display: inline;
+}
+
+span.title
+{
+	display: inline-block;
+	width: 125px; 
+	vertical-align: top; 
+	margin-right: 2px;  
+}
+
+span.wide-title
+{
+	display: inline-block;
+	width: 150px; 
+	vertical-align: top; 
+	margin-right: 2px;  
+}
+
+/* Narrow Columns in popup
+----------------------------------*/
+
+div.narrow
+{
+	display: block;
+	padding: 2px 1px 2px 1px;
+
+}
+
+span.narrow 
+{
+	display: inline-block;
+	min-height: 1.2em;
+	width: 150px;
+	background-color: #f1f1f1;
+	vertical-align: bottom; 
+	padding-left: 2px;  
+}
+
+/* Wide Columns in popup
+-------------------------------*/
+div.wide
+{
+	display: block;
+	padding: 2px 1px 2px 1px;
+
+}
+
+span.wide
+{
+	display: inline-block;
+	min-height: 1.2em;
+	width: 450px;
+	background-color: #efefde;
+	vertical-align: bottom;
+	padding-left: 2px;   
+}
+
+/* Disabled Controls
+-----------------------------*/
+
+.disabled-dropdown
+{
+	display: inline-block;
+	border-color: InactiveBorder;
+	border-style: groove;
+	border-width: 1px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.disabled-text
+{
+	display: inline-block;
+	border-color: InactiveBorder;
+	border-style: groove;
+	border-width: 1px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.disabled-radio
+{
+	display: inline-block;
+	border-color: InactiveBorder;
+	border-style: groove;
+	border-width: 1px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+
+/*
+--------------------------------------------------------------------------------------------------------------------
+BEGIN CUSTOM VALIDATOR CALLOUT
+--------------------------------------------------------------------------------------------------------------------
+*/
+
+.customCalloutStyle div, .customCalloutStyle td
+{
+	border: solid 1px Red;
+	background-color: #fff9f9;
+}
+.customCalloutStyle .ajax__validatorcallout_popup_table
+{
+	display: none;
+	border: none;
+	background-color: transparent;
+	padding: 0px;
+}
+.customCalloutStyle .ajax__validatorcallout_popup_table_row
+{
+	vertical-align: top;
+	height: 100%;
+	background-color: transparent;
+	padding: 0px;
+}
+.customCalloutStyle .ajax__validatorcallout_callout_cell
+{
+	width: 20px;
+	height: 100%;
+	text-align: right;
+	vertical-align: top;
+	border: none;
+	background-color: transparent;
+	padding: 0px;
+}
+.customCalloutStyle .ajax__validatorcallout_callout_table
+{
+	height: 100%;
+	border: none;
+	background-color: transparent;
+	padding: 0px;
+}
+.customCalloutStyle .ajax__validatorcallout_callout_table_row
+{
+	background-color: transparent;
+	padding: 0px;
+}
+.customCalloutStyle .ajax__validatorcallout_callout_arrow_cell
+{
+	padding: 8px 0px 0px 0px;
+	text-align: right;
+	vertical-align: top;
+	font-size: 1px;
+	border: none;
+	background-color: transparent;
+}
+.customCalloutStyle .ajax__validatorcallout_callout_arrow_cell .ajax__validatorcallout_innerdiv
+{
+	font-size: 1px;
+	position: relative;
+	left: 1px;
+	border-bottom: none;
+	border-right: none;
+	border-left: none;
+	width: 15px;
+	background-color: transparent;
+	padding: 0px;
+}
+.customCalloutStyle .ajax__validatorcallout_callout_arrow_cell .ajax__validatorcallout_innerdiv div
+{
+	height: 1px;
+	overflow: hidden;
+	border-top: none;
+	border-bottom: none;
+	border-right: none;
+	padding: 0px;
+	margin-left: auto;
+}
+.customCalloutStyle .ajax__validatorcallout_error_message_cell
+{
+	font-family: Verdana;
+	font-size: 10px;
+	padding: 5px;
+	border-right: none;
+	border-left: none;
+	width: 100%; 
+}
+.customCalloutStyle .ajax__validatorcallout_icon_cell
+{
+	width: 20px;
+	padding: 5px;
+	border-right: none;
+}
+.customCalloutStyle .ajax__validatorcallout_close_button_cell
+{
+	vertical-align: top;
+	padding: 0px;
+	text-align: right;
+	border-left: none;
+}
+.customCalloutStyle .ajax__validatorcallout_close_button_cell .ajax__validatorcallout_innerdiv
+{
+	border: none;
+	text-align: center;
+	width: 10px;
+	padding: 2px;
+	cursor: pointer;
+}
+/*
+--------------------------------------------------------------------------------------------------------------------
+END CUSTOM VALIDATOR CALLOUT
+--------------------------------------------------------------------------------------------------------------------
+*/
+
+/*Modal Popup*/
+.modal-background 
+{
+  background-color: #EFEFEF; /* #C6C6C6;transparent; */
+  filter: alpha(opacity=10); /* IE 7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)"; /* IE 8? */
+  -moz-opacity: 0.1;
+  -khtml-opacity: 0.1;
+  opacity: 0.1;
+}
+
+.modal-popup {
+	background-color:transparent;
+}
+
+
+.modal-error-background 
+{
+  background-color: #EFEFEF; /* #C6C6C6;transparent; */
+  filter: alpha(opacity=10); /* IE 7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)"; /* IE 8? */
+  -moz-opacity: 0.1;
+  -khtml-opacity: 0.1;
+  opacity: 0.1;
+}
+
+.modal-error-popup {
+	background-color:#fff;
+	border-width:4px;
+	border-style:outset;
+	border-color:Red;
+	padding:2px;
+	width: 400px;
+	min-height: 100px;
+}
+
+.popupContent
+{
+	width: 660px;
+	max-height: 650px;
+	overflow: auto;  
+	padding: 4px 4px 4px 4px;
+	margin: 2px 2px 2px 2px;  
+}
+
+.popupButton
+{
+	background-color: #2C3F6A; /* Cream: #efefde; Dark Blue: #465c71; */
+	border: 1px #4e667d solid;
+	padding: 4px 4px 4px 4px;
+	margin: 2px 2px 2px 2px;
+}
+
+.input-popup {
+	background-color: #f9f9f9;
+	border-width:2px;
+	border-style:solid;
+	border-color:#2C3F6A; /* suncrop green */
+	padding:2px;
+	width: 450px;
+}
+
+.input-popup-content
+{ 
+	
+	padding: 4px 4px 4px 4px;
+	margin: 2px 2px 2px 2px;  
+}
+
+.info-popup {
+	background-color: #FFFFFF;
+	border: none;
+	padding:4px;
+}
+
+.info-popup-content
+{ 
+	
+	padding: 4px 4px 4px 4px;
+	margin: 2px 2px 2px 2px;  
+}
+
+.button
+{
+	background-color: #2C3F6A; /* Cream: #efefde; Dark Blue: #465c71; */
+	border: 4px #4e667d outset;
+	color: #FFFFEA;
+	display: block;
+	line-height: 1.35em;
+	padding: 2px 10px;
+	white-space: nowrap;
+	text-decoration: none;
+	margin: 0px 1px;
+	text-align: center;
+}
+
+.button-Search
+{
+	background-color: #2C3F6A; /* Cream: #efefde; Dark Blue: #465c71; */
+	border: 2px #4e667d outset;
+	color: #FFFFEA;
+	display: block;
+	line-height: 1.00em;
+	padding: 2px 10px;	
+	white-space: nowrap;
+	text-decoration: none;
+	margin: 0px 1px;
+	text-align:center;
+}
+
+.addremovebutton
+{
+	background-color: #efefde;
+	border: 2px #4e667d outset;
+	display: inline;
+	line-height: 1.35em;
+	white-space: nowrap;
+	text-decoration: none;
+	text-align: center;
+	padding: 0px 2px;
+}
+
+input[type=button].refresh-button
+{
+	background-color: #efefde;
+	border: 2px #4e667d outset;
+	display: inline;
+	line-height: 1.35em;
+	white-space: nowrap;
+	text-decoration: none;
+	text-align: center;
+	padding: 0px 2px;
+}
+
+input[type=button].decoy-refresh-button
+{
+	background-color: #bfcbd6;
+	border: 2px #4e667d outset;
+	display: inline;
+	line-height: 1.35em;
+	white-space: nowrap;
+	text-decoration: none;
+	text-align: center;
+	padding: 0px 2px;
+}
+
+.disabled-button
+{
+	/*
+	background-color: #efefde;
+	color: #FFFFEA;  Cream: #efefde; Dark Blue: #465c71; */
+	border: 4px #4e667d outset;
+	
+	background-color: #bfcbd6;
+	color: #465c71;
+	display: block;
+	line-height: 1.35em;
+	padding: 2px 10px;
+	white-space: nowrap;
+	text-decoration: none;
+	margin: 0px 1px;
+	text-align: center;
+}
+
+/* Modal Progress */
+#mask    
+{
+  background-color: #EFEFEF; /* #C6C6C6;transparent; */
+  position: absolute;  
+  z-index: 9000; 
+  filter: alpha(opacity=10); /* IE 7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)"; /* IE 8? */
+  -moz-opacity: 0.1;
+  -khtml-opacity: 0.1;
+  opacity: 0.1;
+  display: none;
+  width: 99.9%;
+  height: 99.9%;
+  zoom: 1;   
+}   
+	 
+#boxes .window {   
+  position:absolute;      
+  display:none;   
+  z-index:9999;   
+  padding:10px;   
+} 
+  
+#boxes .window h5 {
+	color:Black;
+}   
+
+#boxes #dialog {   
+	background-color: transparent; 
+	/* border-width:2px;
+	border-style:solid;
+	border-color:Olive; */
+	padding:2px;
+	/* min-width: 650px;  */ 
+}
+/*
+#mask {   
+  position: absolute;  
+  z-index: 9000; 
+  background-color: #EEEEEE; *#C6C6C6;*
+  filter: alpha(opacity=10);
+  -moz-opacity: 0.1;
+  -khtml-opacity: 0.1;
+  opacity: 0.1;
+  display: none;
+  width: 99.9%;
+  height: 99.9%;   
+}   
+	 
+#boxes .window {   
+  position:absolute;   
+  width:440px;   
+  height:200px;   
+  display:none;   
+  z-index:9999;   
+  padding:20px;   
+}   
+  
+  
+* Customize your modal window here, you can add background image too *  
+#boxes #dialog {   
+	background-color:#ffffdd;
+	border-width:2px;
+	border-style:solid;
+	border-color:Olive;
+	padding:2px;
+	min-width: 650px;   
+}
+*/
+
+/* Link List
+-------------------------------- */
+
+div.link-list
+{
+	padding: 4px 0px 4px 8px;
+}
+
+div.link-list ul
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	display: table-row;
+	white-space: nowrap;
+}
+
+div.link-list li
+{
+	float: left;
+}
+
+div.link-list li a, div.link-list li a:visited
+{
+	background-color: #efefde; /* Cream: #efefde; Dark Blue: #465c71; */
+	border: 4px outset LightGray;
+	color: #465c71;
+	display: block;
+	line-height: 1.35em;
+	width: 84px;
+	height: 88px;
+	padding: 4px 20px;
+	text-decoration: none;
+	white-space: normal;
+	float: left;
+}
+
+div.link-list ul li a:hover
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+div.link-list ul li a:active
+{
+	background-color: #465c71;
+	color: #cfdbe6;
+	text-decoration: none;
+}
+
+div.link-list ul li a.link-list-selected
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+/* div list
+--------------------------*/
+
+div.div-list
+{
+	padding: 4px 0px 4px 8px;
+}
+
+div.div-list ul
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	display: table-row;
+	white-space: nowrap;
+}
+
+div.div-list li
+{
+	float: left;
+	margin: 4px;
+}
+
+div.div-list li div
+{
+	background-color: #efefde; /* Cream: #efefde; Dark Blue: #465c71; */
+	border: 4px outset LightGray;
+	/*color: #465c71;*/
+	display: block;
+	line-height: 1.35em;
+	min-width: 80px;
+	min-height: 80px;
+	padding: 4px;
+	text-decoration: none;
+	white-space: normal;
+	float: left;
+}
+
+div.div-list ul li div.region:hover
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+div.link-list ul li div.selected
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+div.div-list li div.waiting
+{
+	background-color: transparent;
+	min-width: 16px;
+		min-height: 16px;
+		width: 16px;
+		height: 16px;
+		border: none;
+		padding: 2px;
+		
+}
+
+div.div-list li div.traffic-light
+{
+	background-color: transparent;
+	color: inherit;
+	background-position: right bottom;
+	background-repeat: no-repeat;
+	min-width: 16px;
+	min-height: 16px;
+	border: none;
+  padding: 0px 18px;       
+}
+
+.link-effect
+{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+
+/* disabled control styles
+--------------------------*/
+
+.disabled-control
+{
+	display: inline-block;
+	border-color: #696969;
+	border-style: groove;
+	border-width: 1px;
+	padding-left: 2px;
+	padding-right: 2px;
+	background: #efefde;
+}
+
+
+/* Deployment Box
+--------------------------*/
+
+.deployment-context-button-container
+{
+	position: relative;
+	border: 4px outset LightGray;
+	padding: 0px; 
+	
+}
+
+/*
+div.deployment-context-button-container:hover
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+*/
+
+div.div-list li div.deployment-context-button-container-selected
+{
+	position: relative;
+	background-color: #006F66;
+	color: #efefde;
+	filter: alpha(opacity=70); /* IE 7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /* IE 8? */
+	-moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+	opacity: 0.7;
+	border: 4px outset LightGray;
+}
+
+
+input[type="submit"].deployment-context-button
+{
+	padding: 3px;
+	width: 100%;
+}
+/*
+input[type="submit"].deployment-context-button
+{
+   width: 100%;
+   height: 100%;
+   elevation: above;
+   position:absolute;
+   left: 0px;
+   top: 0px;
+   background-color: #000;
+   z-index: 999;
+   border: none;
+   filter: alpha(opacity=1);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
+	-moz-opacity: 0.01;
+	-khtml-opacity: 0.01;
+	opacity: 0.01;
+}
+*/
+
+/* Resource Request Box
+--------------------------*/
+
+.request-context-button-container
+{
+	position: relative;
+	border: 4px outset LightGray; 
+	
+}
+
+div.request-context-button-container:hover
+{
+	background-color: #bfcbd6;
+	color: #465c71;
+	text-decoration: none;
+}
+
+div.div-list li div.request-context-button-container-selected
+{
+	position: relative;
+	background-color: #006F66;
+	color: #efefde;
+	filter: alpha(opacity=70); /* IE 7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /* IE 8? */
+	-moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+	opacity: 0.7;
+	border: 4px outset LightGray;
+}
+
+input[type="submit"].request-context-button
+{
+   width: 100%;
+   height: 100%;
+   elevation: above;
+   position:absolute;
+   left: 0px;
+   top: 0px;
+   background-color: #000;
+   z-index: 999;
+   border: none;
+   filter: alpha(opacity=1); /* IE 7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)"; /* IE 8? */
+	-moz-opacity: 0.01;
+	-khtml-opacity: 0.01;
+	opacity: 0.01;
+}
+
+/* Report Background Colours
+------------------------*/
+
+.heading-row
+{
+	background-color: #006699; /* #9BD1BF;*/
+	color: #FFFFFF;
+}
+
+.alt-row
+{
+	background-color: #9BD1BF; /* grey: #EEEEEE;    */
+}
+
+.table-row
+{
+	background-color: #EFEFDE; /* pale blue #EDFFFF; */
+}
+
+.no-background
+{
+	background-color: #FFFFFF;    
+}
+
+
+/* Xml Render */
+.utility {
+		color: black;
+}	
+.nodeName {
+	font-weight:bold;	
+}
+.attributeName 
+{
+	font-weight:bold;
+	color: black;
+}
+.attributeValue
+{
+	color:blue;
+}
+.nodeValue
+{
+	color: black;
+}
+.element {
+	padding-top:0px;
+	margin-top:10px;
+}
+.clickable {	
+	font-weight:bold;
+	font-size:1.2em;
+	color: blue;	
+	cursor:pointer;
+	padding-right:2px;
+	padding-bottom: 2px;
+}
+
+#inline-list {
+	float: left;
+	padding: 5px;
+	
+	}
+
+#inline-list p {
+	display: inline;
+	}
+
+#inline-list ul, #inline-list li {
+	display: inline;
+	float: left;
+	margin: 0;
+	padding: 0;
+	color: #339;
+	font-weight: bold;
+	}
+
+
+/********************************* Costing *******************************************/
+.fieldset 
+{
+	border: 1px solid #CCA383;
+	/*background: #efefde; #FFE8EF;*/
+	padding: 3px;
+	}
+	
+.legend {
+	background: #FF9;
+	border: solid 1px #CCA383;
+	padding: 6px;
+	margin-left:10px;
+}
+	
+/********************************* Costing End **************************************/
+
+
+.GridviewDiv {font-size: 100%; }
+Table.Gridview{border:solid 1px #006699;}
+.GridviewTable{border:none}
+.GridviewTable td{margin-top:0;padding: 0; vertical-align:middle }
+.GridviewTable tr{color: White; height: 30px; text-align:center}
+.Gridview th{color:#FFFFFF;border-right-color:#abb079;border-bottom-color:#abb079;
+	padding:0.5em 0.5em 0.5em 0.5em;text-align:left}  
+.Gridview td{border-bottom-color:#f0f2da;border-right-color:#f0f2da;
+	padding:0.5em 0.5em 0.5em 0.5em;}
+.Gridview tr{color: Black; background-color: White; text-align:left}
+ /*:link,:visited { color: #DF4F13; text-decoration:none }*/
