@@ -20,9 +20,21 @@ function we_have_the_technology() {
 
 if(we_have_the_technology()){
   // magic starts here
+
+  /* stage 2
+  hide_legacy();
+  show_loading();
+  get_data()
+  remove_legacy()
+    html and css
+  rebuild_page()
+  */
+
+  // stage 1
   nice_ify_css();
   add_metro();
   enable_legacy_menu();
+
   update_metro_menu();
   add_metro_events();
 }
@@ -58,7 +70,7 @@ function nice_ify_css() {
 function add_metro() {
   add_metro_menu();
   add_metro_heading();
-  remove_legacy();
+  remove_legacy_header();
 }
 
 function add_metro_menu() {
@@ -104,7 +116,7 @@ function add_metro_heading() {
   $('.nav-bar').css({'padding':'10px'});
 }
 
-function remove_legacy(){
+function remove_legacy_header(){
   $('.header').remove();
 }
 
