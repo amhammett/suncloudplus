@@ -21,34 +21,63 @@ function we_have_the_technology() {
 if(we_have_the_technology()){
   // magic starts here
 
-  /* stage 2
+  // stage 2
   hide_legacy();
-  show_loading();
-  get_data()
-  remove_legacy()
-    html and css
+  //show_loading();
+  data=get_instance_map()
+  //remove_legacy()
+  //  html and css
+
   build_suncloud_plus()
 
+
+
+  // stage 1
+  nice_ify_css();
+  //add_metro();
+  enable_legacy_menu();
+
+  update_metro_menu(data);
+  add_metro_events();
+}
+
+function hide_legacy() {
+  $('.page').hide();
+}
+
 function build_suncloud_plus() {
+  var suncorpplus='<div id="suncloudplus" class="metrouicss"> \
+    <div id="scp_header"></div> \
+    <div id="scp_body"></div> \
+    <div id="scp_footer"></div> \
+  </div>';
+  $('body').prepend(suncorpplus);
+
   build_header();
   build_body();
   build_footer();
 }
-  */
+function build_body() {
+  var heading="";
+  $('#scp_body').append(heading);
+  // split map into regions.
 
-  // stage 1
-  nice_ify_css();
-  add_metro();
-  enable_legacy_menu();
-
-  update_metro_menu();
-  add_metro_events();
+  // print regions
+  var accordion=' \
+        <li class="active"> \
+            <a href="#"> Caption </a> \
+            <div> ...content... </div> \
+        </li>';
+  accordion= '<ul class="accordion dark" data-role="accordion">'+'</ul>';
+  $('#scp_body').append(accordion);
 }
+function build_footer() {}
 
 /***********************************************
  * nice_ify_css()
  ************************************************/
 function nice_ify_css() {
+  $('body').css({'background':'#fff'})
   $('.page').css({
     'border':'none',
     'margin':'0',
@@ -73,70 +102,71 @@ function nice_ify_css() {
 /***********************************************
  * add_metro()
  ************************************************/
-function add_metro() {
+function build_header() {
   add_metro_menu();
   add_metro_heading();
-  remove_legacy_header();
 }
 
 function add_metro_menu() {
   $('body').append(get_metro_menu_assets());
-  $('body').prepend(get_metro_menu_html());
+  $('#scp_header').append(get_metro_menu_html());
 }
 
 function get_metro_menu_assets() {
-  return '<link href="'+resource_location+'css/modern.css" rel="stylesheet"> <script type="text/javascript" src="'+resource_location+'js/lib/jquery-1.8.3.min.js"></script> <script type="text/javascript" src="'+resource_location+'js/dropdown.js"></script>';
+  assets='<link href="'+resource_location+'css/modern.css" rel="stylesheet"> \
+    <script type="text/javascript" src="'+resource_location+'js/lib/jquery-1.8.3.min.js"></script> \
+    <script type="text/javascript" src="'+resource_location+'js/dropdown.js"></script> \
+    <script type="text/javascript" src="'+resource_location+'js/accordion.js"></script>';
+   return assets;
 }
 
 function get_metro_menu_html() {
   var menu_html = '\
-    <div class="metrouicss"> \
-      <div class="nav-bar"> \
-        <div class="nav-bar-inner"> \
-          <a href="#"> \
-            <span class="element brand">Suncrop Cloud</span> \
-          </a> \
-          <span class="divider"></span> \
-          <ul class="menu" style="overflow:visible;"> \
-          <!-- this probably doesnt need to be hard coded --> \
-            <li class="legacy-dash legacy-link" data-name="ctl00$MenuContent$_showProjectDeployments"><a href="#">Project Dashboard</a></li> \
-            <li class="legacy-details legacy-link" data-name="ctl00$MenuContent$_showProjectDetails"><a href="#">Project Details</a></li> \
-            <li class="legacy-res legacy-link" data-name="ctl00$MenuContent$_showResourceDetailsButton"><a href="#">Project Resources</a></li> \
-            <li class="legacy-wiz legacy-link" data-name="ctl00$MenuContent$_showDeploymentWizard"><a href="#">Request Wizard</a></li> \
-            <li data-role="dropdown" class="sites show-sites"> \
-              <a>Sites</a> \
-              <ul class="dropdown-menu" style="display:none;"> \
-                <li class="all_sites"><a href="#">All Sites</a></li> \
-                <li class="divider"></li> \
-                <li class="loading"><a href="#">SITES</a></li> \
-              </ul> \
-            </li> \
-            <li data-role="dropdown" class="ports show-ports"> \
-              <a>Ports</a> \
-              <ul class="dropdown-menu" style="display:none;"> \
-                <li class="all_ports"><a href="#">All Ports</a></li> \
-                <li class="divider"></li> \
-                <li class="loading"><a href="#">PORTS</a></li> \
-              </ul> \
-            </li> \
-            <li data-role="dropdown" class="hosts show-hosts"> \
-              <a>Hosts</a> \
-              <ul class="dropdown-menu" style="display:none;"> \
-                <li class="all_hosts"><a href="#">All Hosts</a></li> \
-                <li class="divider"></li> \
-                <li class="loading"><a href="#">HOSTS</a></li> \
-              </ul> \
-            </li> \
-            <li data-role="dropdown" class="versions show-versions"> \
-              <a>Versions</a> \
-              <ul class="dropdown-menu" style="display:none;"> \
-                <li class="all_versions"><a href="#">All Versions</a></li> \
-                <li class="divider"></li> \
-                <li class="loading"><a href="#">VERSIONS</a></li> \
-              </ul> \
-            </li> \
-          </ul> \
-        </div> \
+    <div class="nav-bar"> \
+      <div class="nav-bar-inner"> \
+        <a href="#"> \
+          <span class="element brand">Suncrop Cloud</span> \
+        </a> \
+        <span class="divider"></span> \
+        <ul class="menu" style="overflow:visible;"> \
+        <!-- this probably doesnt need to be hard coded --> \
+          <li class="legacy-dash legacy-link" data-name="ctl00$MenuContent$_showProjectDeployments"><a href="#">Project Dashboard</a></li> \
+          <li class="legacy-details legacy-link" data-name="ctl00$MenuContent$_showProjectDetails"><a href="#">Project Details</a></li> \
+          <li class="legacy-res legacy-link" data-name="ctl00$MenuContent$_showResourceDetailsButton"><a href="#">Project Resources</a></li> \
+          <li class="legacy-wiz legacy-link" data-name="ctl00$MenuContent$_showDeploymentWizard"><a href="#">Request Wizard</a></li> \
+          <li data-role="dropdown" class="sites show-sites"> \
+            <a>Sites</a> \
+            <ul class="dropdown-menu" style="display:none;"> \
+              <li class="all_sites"><a href="#">All Sites</a></li> \
+              <li class="divider"></li> \
+              <li class="loading"><a href="#">SITES</a></li> \
+            </ul> \
+          </li> \
+          <li data-role="dropdown" class="ports show-ports"> \
+            <a>Ports</a> \
+            <ul class="dropdown-menu" style="display:none;"> \
+              <li class="all_ports"><a href="#">All Ports</a></li> \
+              <li class="divider"></li> \
+              <li class="loading"><a href="#">PORTS</a></li> \
+            </ul> \
+          </li> \
+          <li data-role="dropdown" class="hosts show-hosts"> \
+            <a>Hosts</a> \
+            <ul class="dropdown-menu" style="display:none;"> \
+              <li class="all_hosts"><a href="#">All Hosts</a></li> \
+              <li class="divider"></li> \
+              <li class="loading"><a href="#">HOSTS</a></li> \
+            </ul> \
+          </li> \
+          <li data-role="dropdown" class="versions show-versions"> \
+            <a>Versions</a> \
+            <ul class="dropdown-menu" style="display:none;"> \
+              <li class="all_versions"><a href="#">All Versions</a></li> \
+              <li class="divider"></li> \
+              <li class="loading"><a href="#">VERSIONS</a></li> \
+            </ul> \
+          </li> \
+        </ul> \
       </div> \
     </div>';
   return menu_html;
@@ -145,7 +175,7 @@ function get_metro_menu_html() {
 function add_metro_heading() {
   var page_heading=$('#ctl00_TitleContent__projectNameLabel').text();
   var metro_header='<div class="page-header-content"><h1>'+page_heading+'</h1><a href="/" class="back-button"></a></div>';
-  $('.main').prepend(metro_header);
+  $('#scp_body').prepend(metro_header);
   $('.page-header-content').css({
     'position': 'relative',
     'height': '100px',
@@ -172,9 +202,9 @@ function add_metro_heading() {
   $('.nav-bar').css({'padding':'10px'});
 }
 
-function remove_legacy_header(){
-  $('.header').remove();
-}
+//function remove_legacy_header(){
+//  $('.header').remove();
+//}
 
 /***********************************************
  * enable_legacy_menu()
@@ -190,7 +220,7 @@ function enable_legacy_menu() {
  * update_metro_menu()
  ************************************************/
 
-function update_metro_menu() {
+function update_metro_menu(site_map) {
   function update_sites_list(site_map) {
     var list_html=update_list_helper(site_map, 'name');
     $('.menu .sites ul').append(list_html);
@@ -221,33 +251,32 @@ function update_metro_menu() {
     return list_html;
   }
 
-  function get_instance_map() {
-    var map = {};
-
-    $('.div-list td').each(function(index, element) {
-      var site_name=$(element).find('strong:first').text()
-      if(site_name != "") {
-        var href=$(element).find('a').attr('href');
-        if(typeof href != "undefined") {
-          var instance = {
-            name: site_name,
-            port: href.split(':')[2],
-            host: href.split(':')[1].split('/')[2],
-            url: href
-          }
-          map[instance.port]=instance;
-        }
-      }
-    });
-
-    return map;
-  }
-
-  site_map=get_instance_map();
-
   update_sites_list(site_map);
   update_ports_list(site_map);
   update_hosts_list(site_map);
+}
+
+function get_instance_map() {
+  var map = {};
+
+  $('.div-list td').each(function(index, element) {
+    var site_name=$(element).find('strong:first').text()
+    if(site_name != "") {
+      var href=$(element).find('a').attr('href');
+      var environment=$(element).parents('.div-list').parent().find('h2 span').text();
+      if(typeof href != "undefined") {
+        var instance = {
+          name: site_name,
+          port: href.split(':')[2],
+          host: href.split(':')[1].split('/')[2],
+          url: href,
+          region: environment
+        }
+        map[instance.port]=instance;
+      }
+    }
+  });
+  return map;
 }
 
 /***********************************************
