@@ -28,7 +28,7 @@ if(we_have_the_technology()){
   //remove_legacy()
   //  html and css
 
-  build_suncloud_plus()
+  build_suncloud_plus(data)
 
 
 
@@ -45,7 +45,7 @@ function hide_legacy() {
   $('.page').hide();
 }
 
-function build_suncloud_plus() {
+function build_suncloud_plus(data) {
   var suncorpplus='<div id="suncloudplus" class="metrouicss"> \
     <div id="scp_header"></div> \
     <div id="scp_body"></div> \
@@ -54,22 +54,34 @@ function build_suncloud_plus() {
   $('body').prepend(suncorpplus);
 
   build_header();
-  build_body();
+  build_body(data);
   build_footer();
 }
-function build_body() {
+function build_body(site_map) {
   var heading="";
   $('#scp_body').append(heading);
   // split map into regions.
 
-  // print regions
-  var accordion=' \
-        <li class="active"> \
-            <a href="#"> Caption </a> \
-            <div> ...content... </div> \
-        </li>';
-  accordion= '<ul class="accordion dark" data-role="accordion">'+'</ul>';
+  var accordion= '<ul class="accordion dark" data-role="accordion">'+'</ul>';
   $('#scp_body').append(accordion);
+
+  var accordion_li = new Array();
+  // print list. li = region. data(s) = site
+  $('.main h2').each(function() {
+    accordion_li.push('<li class="active"><a>'+$(this).text()+'</a><div></div></li>');
+
+    // this isn't an efficient way of adding data to the accordions
+    var accordion_data = new Array();
+    // print list. li = region. data(s) = site
+    for(i in site_map) {
+      if(site_map[i].name) {
+        accordion_data.push('<div data-site="'+site_map[i].name+'"></div>');
+      }
+    }
+
+  })
+
+  $('#scp_body ul').append(accordion_li);
 }
 function build_footer() {}
 
