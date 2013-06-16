@@ -68,20 +68,24 @@ function build_body(site_map) {
   var accordion_li = new Array();
   // print list. li = region. data(s) = site
   $('.main h2').each(function() {
-    accordion_li.push('<li class="active"><a>'+$(this).text()+'</a><div></div></li>');
+    var environment=$(this).text();
+    var environment_cleaned=environment.replace(/\s/g, '_');
 
     // this isn't an efficient way of adding data to the accordions
     var accordion_data = new Array();
     // print list. li = region. data(s) = site
     for(i in site_map) {
-      if(site_map[i].name) {
-        accordion_data.push('<div data-site="'+site_map[i].name+'"></div>');
+      if(site_map[i].region == environment) {
+        accordion_data.push('<div data-site="'+site_map[i].name+'">'+site_map[i].name+'</div>');
       }
+      $('.'+environment_cleaned+' .accordion_data').append(accordion_data);
     }
 
+    accordion_li.push('<li class="active '+environment_cleaned+'"><a>'+environment+'</a><div class="accordion-container">'+accordion_data+'</div></li>');
   })
 
-  $('#scp_body ul').append(accordion_li);
+
+  $('#scp_body ul').css({'margin': '0 60px 0 120px'}).append(accordion_li);
 }
 function build_footer() {}
 
