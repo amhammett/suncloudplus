@@ -75,13 +75,16 @@ function build_body(site_map) {
     var accordion_data = new Array();
     // print list. li = region. data(s) = site
     for(i in site_map) {
-      if(site_map[i].region == environment) {
+      if(site_map[i].region === environment) {
+      console.log('-----------');console.log(site_map[i].region);console.log(environment);
         accordion_data.push('<div data-site="'+site_map[i].name+'">'+site_map[i].name+'</div>');
+        //console.log('-----------');console.log(accordion_data);
       }
       $('.'+environment_cleaned+' .accordion_data').append(accordion_data);
     }
 
     accordion_li.push('<li class="active '+environment_cleaned+'"><a>'+environment+'</a><div class="accordion-container">'+accordion_data+'</div></li>');
+       // console.log('######################');console.log(accordion_li);
   })
 
 
@@ -273,7 +276,12 @@ function update_metro_menu(site_map) {
 }
 
 function get_instance_map() {
-  var map = {};
+  var map = {
+    data : {
+      region : new Array()
+    },
+    sites : {}
+  };
 
   $('.div-list td').each(function(index, element) {
     var site_name=$(element).find('strong:first').text()
@@ -281,17 +289,23 @@ function get_instance_map() {
       var href=$(element).find('a').attr('href');
       var environment=$(element).parents('.div-list').parent().find('h2 span').text();
       if(typeof href != "undefined") {
+// split into type? env.split[2]..?
+        var region = environment.split('-')[0].trim();
         var instance = {
           name: site_name,
           port: href.split(':')[2],
           host: href.split(':')[1].split('/')[2],
           url: href,
-          region: environment
+          environment: environment,
+          region: region
         }
-        map[instance.port]=instance;
+
+        map.data.region[region]=region;
+        map.sites[instance.port]=instance;
       }
     }
   });
+ console.log(map)
   return map;
 }
 
