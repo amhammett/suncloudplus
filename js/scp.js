@@ -13,6 +13,7 @@ document.body.appendChild(script);
 
 resource_location="https://assetsdev.sun.cloud/new-media/suncrop-cloud-plus/";
 resource_location="";
+var data;
 
 function we_have_the_technology() {
   return true;
@@ -28,7 +29,7 @@ if(we_have_the_technology()){
   //remove_legacy()
   //  html and css
 
-  build_suncloud_plus(data)
+  build_suncloud_plus()
 
 
 
@@ -45,7 +46,7 @@ function hide_legacy() {
   $('.page').hide();
 }
 
-function build_suncloud_plus(data) {
+function build_suncloud_plus() {
   var suncorpplus='<div id="suncloudplus" class="metrouicss"> \
     <div id="scp_header"></div> \
     <div id="scp_body"></div> \
@@ -54,41 +55,41 @@ function build_suncloud_plus(data) {
   $('body').prepend(suncorpplus);
 
   build_header();
-  build_body(data);
+  build_body();
   build_footer();
 }
-function build_body(site_map) {
+function build_body() {
   var heading="";
   $('#scp_body').append(heading);
   // split map into regions.
 
-  var accordion= '<ul class="accordion dark" data-role="accordion">'+'</ul>';
-  $('#scp_body').append(accordion);
+  var accordion_lis='';
+  var li_data='';
 
-  var accordion_li = new Array();
-  // print list. li = region. data(s) = site
-  $('.main h2').each(function() {
-    var environment=$(this).text();
-    var environment_cleaned=environment.replace(/\s/g, '_');
+  for(i in data.regions) {
+    var region= data.regions[i];
 
-    // this isn't an efficient way of adding data to the accordions
-    var accordion_data = new Array();
-    // print list. li = region. data(s) = site
-    for(i in site_map) {
-      if(site_map[i].region === environment) {
-      console.log('-----------');console.log(site_map[i].region);console.log(environment);
-        accordion_data.push('<div data-site="'+site_map[i].name+'">'+site_map[i].name+'</div>');
-        //console.log('-----------');console.log(accordion_data);
+    for (j in data.instances) {
+      var site = data.instances[j];
+
+      if(site.region==region) {
+        li_data+='<div class="tile" data-sites="'+site.site+'"><a href="'+site.url+'"> \
+            <span class="site"> '+ site.site +' </span> \
+            <span class="host"> '+ site.host +' </span> \
+            <span class="port"> '+ site.port +' </span> \
+            <span class="status"> '+ site.status +' </span> \
+          </a></div>';
       }
-      $('.'+environment_cleaned+' .accordion_data').append(accordion_data);
     }
+    accordion_lis+='<li class="active '+region+'"><a>'+region+'</a> \
+        <div>'+li_data+'<div class="clear"></div></div> \
+      </li>';
+  }
 
-    accordion_li.push('<li class="active '+environment_cleaned+'"><a>'+environment+'</a><div class="accordion-container">'+accordion_data+'</div></li>');
-       // console.log('######################');console.log(accordion_li);
-  })
+  accordion = '<ul class="accordion dark" data-role="accordion">'+accordion_lis+'</ul>';
 
-
-  $('#scp_body ul').css({'margin': '0 60px 0 120px'}).append(accordion_li);
+  $('#scp_body').append(accordion);
+  $('#scp_body ul').css({'margin': '0 60px 0 120px'})
 }
 function build_footer() {}
 
@@ -155,8 +156,8 @@ function get_metro_menu_html() {
           <li class="legacy-wiz legacy-link" data-name="ctl00$MenuContent$_showDeploymentWizard"><a href="#">Request Wizard</a></li> \
           <li data-role="dropdown" class="sites show-sites"> \
             <a>Sites</a> \
-            <ul class="dropdown-menu" style="display:none;"> \
-              <li class="all_sites"><a href="#">All Sites</a></li> \
+            <ul class="dropdown-menu" class="sites" style="display:none;"> \
+              <li class="all_sites"><a href="#" data-sites="all_sites">All Sites</a></li> \
               <li class="divider"></li> \
               <li class="loading"><a href="#">SITES</a></li> \
             </ul> \
@@ -164,7 +165,7 @@ function get_metro_menu_html() {
           <li data-role="dropdown" class="ports show-ports"> \
             <a>Ports</a> \
             <ul class="dropdown-menu" style="display:none;"> \
-              <li class="all_ports"><a href="#">All Ports</a></li> \
+              <li class="all_ports"><a href="#" data-ports="all_ports">All Ports</a></li> \
               <li class="divider"></li> \
               <li class="loading"><a href="#">PORTS</a></li> \
             </ul> \
@@ -172,7 +173,7 @@ function get_metro_menu_html() {
           <li data-role="dropdown" class="hosts show-hosts"> \
             <a>Hosts</a> \
             <ul class="dropdown-menu" style="display:none;"> \
-              <li class="all_hosts"><a href="#">All Hosts</a></li> \
+              <li class="all_hosts"><a href="#" data-hosts="all_hosts">All Hosts</a></li> \
               <li class="divider"></li> \
               <li class="loading"><a href="#">HOSTS</a></li> \
             </ul> \
@@ -180,7 +181,7 @@ function get_metro_menu_html() {
           <li data-role="dropdown" class="versions show-versions"> \
             <a>Versions</a> \
             <ul class="dropdown-menu" style="display:none;"> \
-              <li class="all_versions"><a href="#">All Versions</a></li> \
+              <li class="all_versions"><a href="#" data-versions="all_versions">All Versions</a></li> \
               <li class="divider"></li> \
               <li class="loading"><a href="#">VERSIONS</a></li> \
             </ul> \
@@ -239,48 +240,36 @@ function enable_legacy_menu() {
  * update_metro_menu()
  ************************************************/
 
-function update_metro_menu(site_map) {
-  function update_sites_list(site_map) {
-    var list_html=update_list_helper(site_map, 'name');
-    $('.menu .sites ul').append(list_html);
-    $('.menu .sites ul li.loading').remove();
-  }
-
-  function update_ports_list(site_map) {
-    var list_html=update_list_helper(site_map, 'port');
-    $('.menu .ports ul').append(list_html);
-    $('.menu .ports ul li.loading').remove()
-  }
-  function  update_hosts_list(site_map) {
-    var list_html=update_list_helper(site_map, 'host');
-    $('.menu .hosts ul').append(list_html)
-    $('.menu .hosts ul li.loading').remove();
-  }
-
-  function update_list_helper(site_map, list_type) {
+function update_metro_menu() {
+  function update_list_item(type) {
     var list_html=new Array();
 
-    for(site in site_map) {
-      if(site_map[site][list_type]) {
-        list_html.push('<li class="'+site_map[site][list_type]+'"><a href="#">'+site_map[site][list_type]+'</a></li>');
+    for(i in data[type]) {
+      item=data[type][i];
+
+      if(item) {
+        list_html.push('<li><a href="#" data-'+type+'="'+item+'">'+item+'</a></li>');
       }
     }
     list_html.sort();
 
-    return list_html;
+    $('.menu .'+type+' ul').append(list_html)
+    $('.menu .'+type+' ul li.loading').remove();
   }
 
-  update_sites_list(site_map);
-  update_ports_list(site_map);
-  update_hosts_list(site_map);
+  for(i in {"sites":"sites", "ports":"ports", "hosts":"hosts", "versions":"versions"}) {
+    update_list_item(i);
+  }
 }
 
 function get_instance_map() {
   var map = {
-    data : {
-      region : new Array()
-    },
-    sites : {}
+    hosts : {},
+    ports : {},
+    regions : {},
+    sites : {},
+    instances : new Array(),
+    versions : {}
   };
 
   $('.div-list td').each(function(index, element) {
@@ -288,24 +277,33 @@ function get_instance_map() {
     if(site_name != "") {
       var href=$(element).find('a').attr('href');
       var environment=$(element).parents('.div-list').parent().find('h2 span').text();
+      var version = environment.split('-')[2].trim();
+
       if(typeof href != "undefined") {
-// split into type? env.split[2]..?
         var region = environment.split('-')[0].trim();
+        var status = "tbd";
         var instance = {
-          name: site_name,
+          site: site_name,
           port: href.split(':')[2],
           host: href.split(':')[1].split('/')[2],
           url: href,
           environment: environment,
-          region: region
+          status: status,
+          region: region,
+          version: version
         }
 
-        map.data.region[region]=region;
-        map.sites[instance.port]=instance;
+        map.regions[region]=region;
+        map.ports[instance.port]=instance.port;
+        map.hosts[instance.host]=instance.host;
+        map.sites[instance.site]=instance.site;
+        map.instances.push(instance);
       }
+
+      map.versions[version]=version;
     }
   });
- console.log(map)
+ el(map)
   return map;
 }
 
@@ -315,13 +313,14 @@ function get_instance_map() {
 function add_metro_events() {
   // show all instances for a single site
   function show_sites(site_name) {
-    $('ul li').show();
+    $('.accordion .tile').show();
 
     if(site_name == "all_sites") {return;}
     
-    $('.div-list td').each(function(index, element) {
-      if($(element).find('strong:first').text() != site_name && $(element).find('strong:first').text() != "") {
-        $(this).parent().parent().parent().parent().parent().hide();
+    $('.accordion .tile').each(function(index, element) {
+      el($(element).attr('data-sites')+'> != <'+site_name)
+      if($(element).attr('data-sites') != site_name) {
+        $(element).hide();
       }
     });
   }
@@ -352,7 +351,7 @@ function add_metro_events() {
   }
 
   $('.show-sites li a').click(function() {
-    show_sites($(this).parent().attr('class'));
+    show_sites($(this).attr('data-sites'));
   });
 
   $('.show-ports li a').click(function() {
@@ -369,7 +368,7 @@ function add_metro_events() {
 
 
 
-
+/*
 
 
 
@@ -413,4 +412,6 @@ function create_ports_tool() {
   return port_selector+port_selector_scripts;
 }
 
+*/
 
+function el(s) {console.log(s);}
