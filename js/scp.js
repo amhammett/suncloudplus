@@ -62,18 +62,22 @@ function build_body() {
   var heading="";
   $('#scp_body').append(heading);
   // split map into regions.
-
   var accordion_lis='';
-  var li_data='';
 
   for(i in data.regions) {
+    var li_data='';
     var region= data.regions[i];
 
     for (j in data.instances) {
       var site = data.instances[j];
 
-      if(site.region==region) {
-        li_data+='<div class="tile" data-sites="'+site.site+'"><a href="'+site.url+'"> \
+      if(site.region===region) {
+        li_data+='<div class="tile" \
+          data-sites="'+site.site+'"\
+          data-ports="'+site.port+'"\
+          data-hosts="'+site.host+'"\
+          data-regions="'+site.region+'"\
+          ><a href="'+site.url+'"> \
             <span class="site"> '+ site.site +' </span> \
             <span class="host"> '+ site.host +' </span> \
             <span class="port"> '+ site.port +' </span> \
@@ -89,7 +93,6 @@ function build_body() {
   accordion = '<ul class="accordion dark" data-role="accordion">'+accordion_lis+'</ul>';
 
   $('#scp_body').append(accordion);
-  $('#scp_body ul').css({'margin': '0 60px 0 120px'})
 }
 function build_footer() {}
 
@@ -97,25 +100,7 @@ function build_footer() {}
  * nice_ify_css()
  ************************************************/
 function nice_ify_css() {
-  $('body').css({'background':'#fff'})
-  $('.page').css({
-    'border':'none',
-    'margin':'0',
-    'width':'100%'
-  });
-  $('h2').css({'margin':'0'});
   $(".header .hideSkiplink ").hide();
-  $("div.div-list ul").css("display","block").css("width","100%");
-  $("drupal_tools_site_selector select").css("float","left");
-  $('#drupal_tools div').css({
-    'background-color':'#2C3F6A',
-    'color':'#FFFFEA',
-    'display':'block',
-    'line-height':'1.70em',
-    'padding':'2px 10px',
-    'white-space':'nowrap',
-    'text-decoration':'none'
-  });
   $('.waiting').hide();
 }
 
@@ -134,6 +119,7 @@ function add_metro_menu() {
 
 function get_metro_menu_assets() {
   assets='<link href="'+resource_location+'css/modern.css" rel="stylesheet"> \
+    <link href="'+resource_location+'css/scp.css" rel="stylesheet"> \
     <script type="text/javascript" src="'+resource_location+'js/lib/jquery-1.8.3.min.js"></script> \
     <script type="text/javascript" src="'+resource_location+'js/dropdown.js"></script> \
     <script type="text/javascript" src="'+resource_location+'js/accordion.js"></script>';
@@ -196,30 +182,6 @@ function add_metro_heading() {
   var page_heading=$('#ctl00_TitleContent__projectNameLabel').text();
   var metro_header='<div class="page-header-content"><h1>'+page_heading+'</h1><a href="/" class="back-button"></a></div>';
   $('#scp_body').prepend(metro_header);
-  $('.page-header-content').css({
-    'position': 'relative',
-    'height': '100px',
-  }).find('h1').css({
-    'position': 'absolute',
-    'margin': '0',
-    'padding': '0',
-    'left': '120px',
-    'bottom': '0',
-    'font-family': "'Segoe UI Light', 'Open Sans', Verdana, Arial, Helvetica, sans-serif",
-    'font-weight': '200',
-    'font-size': '42pt',
-    'letter-spacing': '0.00em',
-    'line-height': '65pt',
-    'font-smooth': 'always',
-    'color': '#000000'
-  });
-  $('.back-button').css({
-    'background':'url(/img/back.png) no-repeat 35px 35px',
-    'display':'block',
-    'height':'100px',
-    'width':'100px'
-  });
-  $('.nav-bar').css({'padding':'10px'});
 }
 
 //function remove_legacy_header(){
@@ -303,7 +265,7 @@ function get_instance_map() {
       map.versions[version]=version;
     }
   });
- el(map)
+ //el(map)
   return map;
 }
 
@@ -312,28 +274,14 @@ function get_instance_map() {
  ************************************************/
 function add_metro_events() {
   // show all instances for a single site
-  function show_sites(site_name) {
-    $('.accordion .tile').show();
 
-    if(site_name == "all_sites") {return;}
+  function show_tile(search_type, search_value) {
+    $('.accordion .tile').show();
+    if('all_'+search_type === search_value) {return;}
     
     $('.accordion .tile').each(function(index, element) {
-      el($(element).attr('data-sites')+'> != <'+site_name)
-      if($(element).attr('data-sites') != site_name) {
+      if($(element).attr('data-'+search_type) != search_value) {
         $(element).hide();
-      }
-    });
-  }
-
-  // show all instances for a single port
-  function show_ports(site_port) {
-    $('ul li').show();
-
-    if(site_port == "all_ports") {return;}
-    
-    $('.div-list td a').each(function(index, element) {
-      if($(this).attr('href').split(':')[2] != site_port) {
-        $(this).parent().parent().parent().parent().parent().parent().parent().hide();
       }
     });
   }
@@ -351,67 +299,17 @@ function add_metro_events() {
   }
 
   $('.show-sites li a').click(function() {
-    show_sites($(this).attr('data-sites'));
+    show_tile('sites', $(this).attr('data-sites'));
   });
 
   $('.show-ports li a').click(function() {
-    show_ports($(this).parent().attr('class'));
+    show_tile('ports', $(this).attr('data-ports'));
   });
 
   $('.show-hosts li a').click(function() {
-    show_hosts($(this).parent().attr('class'));
+    show_tile('hosts', $(this).attr('data-hosts'));
   });
 }
 
-
-/************************************************/
-
-
-
-/*
-
-
-
-// tools bar
-function create_toolbar() {
-
-  var drupal_tools='<ul class="drupal_tools">'+create_sites_tool() + create_ports_tool() + '</ul>';
-
-  $('.menu .level1').append(drupal_tools);
-}
-
-function create_sites_tool() {
-  var dt_options;
-  
-  for (site in get_sites()) {
-    dt_options+='<li data-site="'+site+'"><a href="#">'+site+'</a></li>';
-  };
-
-  var site_selector='<ul id="dt_site_selector">' + dt_options + '</ul>';
-  var site_selector_scripts="<script>$('#dt_site_selector').change(function() {show_site($('#dt_site_selector').val()); reset_selector('dt_site_selector')});</script>"
-
-  return site_selector+site_selector_scripts;
-}
-
-function reset_selector(not_id) {
-  $('.drupal_tools div select[id!="'+not_id+'"]').each(function() {
-    $(this).find('option:first').attr('selected', 'true');
-  });
-}
-
-function create_ports_tool() {
-  var dt_options;
-
-  for (port in get_ports()) {
-    dt_options+='<li data-site="'+port+'"><a href="#">'+port+'</a></li>';
-  };
-
-  var port_selector='<ul id="dt_port_selector">' + dt_options + '</ul>';
-  var port_selector_scripts="<script>$('#dt_port_selector').change(function() {show_port($('#dt_port_selector').val());reset_selector('dt_port_selector')});</script>"
-
-  return port_selector+port_selector_scripts;
-}
-
-*/
 
 function el(s) {console.log(s);}
